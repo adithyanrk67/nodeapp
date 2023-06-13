@@ -1,0 +1,16 @@
+#sudo -u postgres psql
+
+CREATE DATABASE node_db;
+GRANT ALL PRIVILEGES ON DATABASE node_db TO postgreuser;
+\c node_db
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100)
+);
+ALTER USER postgreuser PASSWORD 'Frds@1234567890';
+\q
+
+
+

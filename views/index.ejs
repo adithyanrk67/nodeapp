@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adinfotech node psql app</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    form { margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Adinfotech node psql app</h1> 
+
+  <form action="/add" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Add User</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+    <% users.forEach(user => { %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+    </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

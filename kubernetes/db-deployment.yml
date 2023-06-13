@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db
+          image: postgres:latest
+          env:
+            - name: POSTGRES_USER
+              value: postgreuser
+            - name: POSTGRES_PASSWORD
+              value: Frds@1234567890
+            - name: POSTGRES_DB
+              value: node_db
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: init-script
+          configMap:
+            name: init-script
+            items:
+              - key: init.sql
+                path: init.sql

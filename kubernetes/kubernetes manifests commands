@@ -1,0 +1,4 @@
+kubectl apply -f web-deployment.yaml
+kubectl apply -f web-service.yaml
+kubectl apply -f db-deployment.yaml
+kubectl apply -f init-script.yaml
