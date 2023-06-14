@@ -4,10 +4,10 @@ const { Pool } = require('pg');
 const app = express();
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
+  host: 'db',
   database: 'node_db',
-  password: 'Frds1234567890', // Replace with your PostgreSQL password
-  port: 5432, // Default PostgreSQL port
+  password: 'Frds@1234567890',
+  port: 5432,
 });
 
 app.set('view engine', 'ejs');

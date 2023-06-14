@@ -9,7 +9,7 @@ RUN npm install express pg ejs
 RUN npm install -g pm2 -y
 
 COPY server.js /home/nodeapp
-COPY views /home/my-website/nodeapp
+COPY views /home/nodeapp/views
 
 EXPOSE 3040
 
