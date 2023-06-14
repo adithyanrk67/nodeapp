@@ -1,3 +1,4 @@
+version: '3'
 services:
   web:
     build:
@@ -6,8 +7,7 @@ services:
     ports:
       - "3040:3040"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   db:
     image: postgres:latest
@@ -15,5 +15,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Frds@1234567890
       - POSTGRES_DB=node_db
+    volumes:
+      - /home/nodeapp/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+
