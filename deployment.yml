@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+        - name: nodeapp
+          image: vadakkan01/nodeapp:0.1
+          ports:
+            - containerPort: 3040
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: Frds@1234567890
+            - name: POSTGRES_DB
+              value: node_db
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+            - name: init-sql
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              subPath: init.sql
+          command: ["pm2-runtime", "start", "server.js"]
+      volumes:
+        - name: db-data
+          emptyDir: {}
+        - name: init-sql
+          configMap:
+            name: init-sql-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: nodeapp
+  ports:
+    - protocol: TCP
+      port: 3040
+      targetPort: 3040
+  type: NodePort

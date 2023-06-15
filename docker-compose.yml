@@ -3,7 +3,7 @@ services:
   web:
     build:
       context: .
-    image: vadakkan01/nodeapp:0.12
+    image: vadakkan01/nodeapp:0.1
     ports:
       - "3040:3040"
     depends_on:
